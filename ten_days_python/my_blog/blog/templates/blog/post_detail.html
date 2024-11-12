@@ -1,0 +1,15 @@
+<!-- templates/blog/post_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p><em>Published on {{ post.created_at }}</em></p>
+    <div>{{ post.content }}</div>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
+
