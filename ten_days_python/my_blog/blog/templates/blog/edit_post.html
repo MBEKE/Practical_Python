@@ -1,0 +1,8 @@
+<!-- templates/blog/edit_post.html -->
+<h1>Edit Post: {{ post.title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Post</button>
+</form>
+<a href="{% url 'post_detail' post.id %}">Back to Post</a>
