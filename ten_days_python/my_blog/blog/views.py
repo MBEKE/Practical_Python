@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import BlogPost 
 from .forms import PostForm  
 
@@ -13,6 +14,7 @@ def post_detail(request, post_id):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 # View to add a new post
+@login_required
 def add_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -24,6 +26,7 @@ def add_post(request):
     return render(request, 'blog/add_post.html', {'form': form})
 
 # View to edit an existing post
+@login_required
 def edit_post(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id)
     if request.method == 'POST':
@@ -35,9 +38,11 @@ def edit_post(request, post_id):
         form = PostForm(instance=post)
     return render(request, 'blog/edit_post.html', {'form': form, 'post': post})
 
+# View to delete an existing post
+@login_required
 def delete_post(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id)
-    if request.metthod == "POST":
+    if request.method == "POST":
         post.delete()
         return redirect("homepage")
-    return render(request, 'blog/delete_post.html',{'post': post})
+    return render(request, 'blog/delete_post.html', {'post': post})
